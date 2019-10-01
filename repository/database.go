@@ -1,17 +1,16 @@
-package database
+package repository
 
 import (
-	"database/sql"
-
+	"github.com/jmoiron/sqlx"
 	"github.com/someDevDude/todo-server/util"
 )
 
 //DB holder for app
-var DB *sql.DB
+var DB *sqlx.DB
 
 //Connect to DB
 func Connect() {
-	db, err := sql.Open("mysql", "root:@/todolist?charset=utf8")
+	db, err := sqlx.Connect("mysql", "root:@/todolist?charset=utf8")
 
 	DB = db
 

@@ -7,12 +7,12 @@ import (
 
 	"github.com/gorilla/mux"
 	"github.com/someDevDude/todo-server/api"
-	"github.com/someDevDude/todo-server/database"
+	"github.com/someDevDude/todo-server/repository"
 )
 
 func main() {
-	database.Connect()
-	defer database.DB.Close()
+	repository.Connect()
+	defer repository.DB.Close()
 
 	r := mux.NewRouter()
 
