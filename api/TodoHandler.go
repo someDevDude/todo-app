@@ -7,7 +7,7 @@ import (
 	"github.com/gorilla/mux"
 	"github.com/gorilla/schema"
 	"github.com/someDevDude/todo-server/models"
-	"github.com/someDevDude/todo-server/repository"
+	"github.com/someDevDude/todo-server/database"
 	"github.com/someDevDude/todo-server/util"
 )
 
@@ -24,7 +24,7 @@ func queryTodosHandler(rw http.ResponseWriter, r *http.Request) {
 	err := schema.NewDecoder().Decode(&params, r.URL.Query())
 	util.CheckErr(err, func(err error) { panic(err) })
 
-	results := repository.QueryTodos(params)
+	results := database.QueryTodos(params)
 
 	resp, err := json.Marshal(results)
 	util.CheckErr(err, func(err error) { panic(err) })
@@ -40,5 +40,5 @@ func createTodoHandler(rw http.ResponseWriter, r *http.Request) {
 	err := decoder.Decode(&todo)
 	util.CheckErr(err, func(err error) { panic(err) })
 
-	repository.CreateTodo(todo)
+	database.CreateTodo(todo)
 }
