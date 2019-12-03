@@ -6,8 +6,9 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 
 	"github.com/gorilla/mux"
-	"github.com/someDevDude/todo-server/api"
-	"github.com/someDevDude/todo-server/database"
+
+	"bitbucket.org/glxdevs/todo-server/api"
+	"bitbucket.org/glxdevs/todo-server/database"
 )
 
 func main() {

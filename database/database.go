@@ -1,6 +1,9 @@
 package database
 
 import (
+	"fmt"
+	"os"
+
 	"github.com/jmoiron/sqlx"
 	"github.com/someDevDude/todo-server/util"
 )
@@ -10,7 +13,8 @@ var DB *sqlx.DB
 
 //Connect to DB
 func Connect() {
-	db, err := sqlx.Connect("mysql", "root:@/todolist?charset=utf8")
+	fmt.Printf(os.Getenv("DB_URL"))
+	db, err := sqlx.Connect("mysql", os.Getenv("DB_URL"))
 
 	DB = db
 

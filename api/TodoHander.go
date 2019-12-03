@@ -6,8 +6,8 @@ import (
 
 	"github.com/gorilla/mux"
 	"github.com/gorilla/schema"
-	"github.com/someDevDude/todo-server/models"
 	"github.com/someDevDude/todo-server/database"
+	"github.com/someDevDude/todo-server/models"
 	"github.com/someDevDude/todo-server/util"
 )
 

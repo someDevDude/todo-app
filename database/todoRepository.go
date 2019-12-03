@@ -38,7 +38,7 @@ func QueryTodos(params models.ListParams) []models.Todo {
 		args["maxResults"] = params.MaxResults
 	}
 
-	rows, err := DB.NamedQuery(queryString, args)
+	rows, err := DB.Query(queryString)
 	util.CheckErr(err, func(err error) { panic(err) })
 
 	for rows.Next() {
