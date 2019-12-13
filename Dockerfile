@@ -3,12 +3,9 @@ RUN mkdir /app
 ADD . /app
 WORKDIR /app
 
-# needed when dependencies are added
-COPY go.mod go.sum ./
+COPY . .
 
 RUN go mod download
-
-COPY . .
 
 ENV PORT=8080
 
