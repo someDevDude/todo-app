@@ -45,3 +45,24 @@ This will build images of the database and the server and then start them
 
 ## Starting the frontend server
 Coming soon, probably when there is a frontend server
+
+## Useful links/docs/tutorials
+- [Running debugging tools for Go in a container](https://medium.com/@kaperys/delve-into-docker-d6c92be2f823)
+  - Note that the article is out of date use the following launch json
+  ```json
+    {
+        "version": "0.2.0",
+        "configurations": [
+            {
+                "name": "Todo Server",
+                "type": "go",
+                "request": "attach",
+                "mode": "remote",
+                "remotePath": "/go/src/github.com/someDevDude/todo-server",
+                "port": 40000,
+                "host": "172.17.0.2",
+                "showLog": true
+            }
+        ]
+    }
+  ```
