@@ -1,19 +1,19 @@
-FROM golang:latest
-RUN mkdir /app
-ADD . /app
-WORKDIR /app
+# STAGE 1: Build
+from golang:latest AS build
 
-COPY . .
-
+# fetch dependencies
 RUN go mod download
 
-ENV PORT=8080
+WORKDIR /go/src/github.com/someDevDude/todo-app
 
-# Build the Go app
-RUN go build -o main .
+# Copy all sources in
+COPY . .
 
-# Expose port 8080 to the outside world
-EXPOSE $PORT
+RUN go build -o todo-server .
 
-# Command to run the executable
-CMD ["/app/main"]
+# STAGE 2: Runtime
+FROM alpine
+
+COPY --from=build /go/bin/todo-server /todo-server
+
+CMD ["/todo-server"]
