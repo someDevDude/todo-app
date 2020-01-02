@@ -5,7 +5,16 @@ The todo app is a Golang application designed to be a example of Go, Docker and 
 Currently to get started, you will need to run go through the following
 1. [Download Docker](https://docs.docker.com/v17.12/install/)
 2. [Download Go](https://golang.org/doc/install)
-3. Run the following base code
+3. Create an .env file with the following
+```
+DB_ROOT_USER=root
+DB_ROOT_PW=root
+DB_NAME=todolist
+DB_USER=user
+DB_PW=password
+DB_URLuser:password@/todolist
+```
+4. Run the following base code
 ```bash
 # create database and create bash shell
 docker-compose up database
@@ -45,24 +54,3 @@ This will build images of the database and the server and then start them
 
 ## Starting the frontend server
 Coming soon, probably when there is a frontend server
-
-## Useful links/docs/tutorials
-- [Running debugging tools for Go in a container](https://medium.com/@kaperys/delve-into-docker-d6c92be2f823)
-  - Note that the article is out of date use the following launch json
-  ```json
-    {
-        "version": "0.2.0",
-        "configurations": [
-            {
-                "name": "Todo Server",
-                "type": "go",
-                "request": "attach",
-                "mode": "remote",
-                "remotePath": "/go/src/github.com/someDevDude/todo-server",
-                "port": 40000,
-                "host": "172.17.0.2",
-                "showLog": true
-            }
-        ]
-    }
-  ```
