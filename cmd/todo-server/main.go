@@ -18,6 +18,7 @@ func main() {
 	r := mux.NewRouter()
 
 	api.CreateHomeRoutes(r)
+	api.CreateHealthCheckRoutes(r)
 	api.CreateTodoRoutes(r)
 
 	http.ListenAndServe(":8080", r)
