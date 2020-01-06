@@ -1,15 +1,15 @@
+# build
 FROM golang:latest AS build
 RUN mkdir /app
 ADD . /app
 WORKDIR /app
 COPY . .
 RUN go mod download
+ENV GOOS=linux GOARCH=386
 RUN go build -o ./build/todo-server ./cmd/todo-server
 
-
+# run
 FROM alpine
 COPY --from=build /app/build/todo-server ./
 EXPOSE 8080
-RUN ls
-RUN ls todo-server
 CMD ["./todo-server"]
