@@ -1,3 +1,4 @@
-todo-server
+./todo-server
 .vscode
 .env
+resources/secret.yaml
