@@ -1,6 +1,10 @@
 # Todo App
 The todo app is a Golang application designed to be a example of Go, Docker and Kubernetes with a React Typrescript frontend.
 
+## !!!! DO NOT USE README !!!!
+Currently I am changiung to use Kubernetes as well as create a good developer environment, I will update the readme when everything is working again
+[Skaffold](https://skaffold.dev/docs/)
+
 ## Getting Setup
 Currently to get started, you will need to run go through the following
 1. [Download Docker](https://docs.docker.com/v17.12/install/)
