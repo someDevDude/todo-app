@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todo-server
+spec:
+  selector:
+    matchLabels:
+      run: todo-server
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        run: todo-server
+    spec:
+      containers:
+      - name: todo-server
+        image: docker.io/somedevdude/todo-server:latest
+        livenessProbe:
+          httpGet:
+              path: /healthcheck
+              port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 10
+          failureThreshold: 3
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+          - containerPort: 8080
+            protocol: TCP 
