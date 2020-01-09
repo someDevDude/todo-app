@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: todo-server
-        image: docker.io/somedevdude/todo-server:latest
+        image: docker.io/somedevdude/todo-server
         livenessProbe:
           httpGet:
               path: /healthcheck

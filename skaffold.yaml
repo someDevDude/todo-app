@@ -8,4 +8,9 @@ build:
 deploy:
   kubectl:
     manifests:
-    - k8s-todo-server-pod.yaml
+    - k8s-todo-server-deployment.yaml
+portForward:
+  - resourceType: deployment
+    resourceName: todo-server
+    port: 8080
+    localPort: 8080
