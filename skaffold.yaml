@@ -9,6 +9,8 @@ deploy:
   kubectl:
     manifests:
     - k8s-todo-server-deployment.yaml
+    - k8s-todo-nfs.yaml
+    - k8s-todo-db.yaml
 portForward:
   - resourceType: deployment
     resourceName: todo-server
