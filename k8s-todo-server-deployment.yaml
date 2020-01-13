@@ -2,15 +2,20 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: todo-server
+  labels:
+    app: todo-server
+    tier: server
 spec:
   selector:
     matchLabels:
-      run: todo-server
+      app: todo-server
+      tier: server
   replicas: 1
   template:
     metadata:
       labels:
-        run: todo-server
+        app: todo-server
+        tier: server
     spec:
       containers:
       - name: todo-server
