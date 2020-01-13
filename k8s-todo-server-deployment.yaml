@@ -3,22 +3,22 @@ kind: Deployment
 metadata:
   name: todo-server
   labels:
-    app: todo-server
+    app: todo-app
     tier: server
 spec:
   selector:
     matchLabels:
-      app: todo-server
+      app: todo-app
       tier: server
   replicas: 1
   template:
     metadata:
       labels:
-        app: todo-server
+        app: todo-app
         tier: server
     spec:
       containers:
-      - name: todo-server
+      - name: todo-app
         image: docker.io/somedevdude/todo-server
         livenessProbe:
           httpGet:
