@@ -1,0 +1,23 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: todo-ingress
+spec:
+  backend:
+    serviceName: default-http-backend
+    servicePort: 80
+  rules:
+  # - host: localhost:3000
+  #   http:
+  #     paths:
+  #     - path: /
+  #       backend:
+  #         serviceName: todo-web-service
+  #         servicePort: 80
+  - host: todo.local
+    http:
+      paths:
+      - path: "/"
+        backend:
+          serviceName: todo-server-service
+          servicePort: 8080

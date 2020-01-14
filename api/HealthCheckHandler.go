@@ -13,5 +13,5 @@ func CreateHealthCheckRoutes(r *mux.Router) {
 }
 
 func healthCheckHandler(rw http.ResponseWriter, r *http.Request) {
-	io.WriteString(rw, `status: upa`)
+	io.WriteString(rw, `status: up`)
 }

@@ -11,6 +11,7 @@ deploy:
     - k8s-persistent-volume-claim.yaml
     - k8s-todo-database-deployment.yaml
     - k8s-todo-server-deployment.yaml
+    - k8s-todo-server-deployment.yaml
 portForward:
   - resourceType: deployment
     resourceName: todo-server
