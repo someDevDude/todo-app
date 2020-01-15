@@ -8,7 +8,7 @@ build:
 deploy:
   kubectl:
     manifests:
-    - k8s-persistent-volume-claim.yaml
+    - secrets.yaml
     - k8s-todo-database-deployment.yaml
     - k8s-todo-server-deployment.yaml
 portForward:

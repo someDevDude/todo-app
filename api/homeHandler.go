@@ -3,6 +3,8 @@ package api
 import (
 	"io"
 	"net/http"
+	"os"
+	"strings"
 
 	"github.com/gorilla/mux"
 )
@@ -13,5 +15,13 @@ func CreateHomeRoutes(r *mux.Router) {
 }
 
 func homeHandler(rw http.ResponseWriter, r *http.Request) {
-	io.WriteString(rw, `pong`)
+	var dbConnectionString strings.Builder
+	dbConnectionString.WriteString(os.Getenv("DB_USER"))
+	dbConnectionString.WriteString(":")
+	dbConnectionString.WriteString(os.Getenv("DB_PW"))
+	dbConnectionString.WriteString("@tcp(")
+	dbConnectionString.WriteString(os.Getenv("DB_URL"))
+	dbConnectionString.WriteString(":3306)/")
+	dbConnectionString.WriteString(os.Getenv("DB_NAME"))
+	io.WriteString(rw, dbConnectionString.String())
 }
