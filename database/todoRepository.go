@@ -8,8 +8,8 @@ import (
 )
 
 //QueryTodos queires todos
-func QueryTodos(params models.ListParams) []models.Todo {
-	var results []models.Todo
+func QueryTodos(params models.ListParams) []models.TodoFull {
+	var results []models.TodoFull
 
 	queryString := "SELECT * FROM todo"
 	separator := " WHERE"
@@ -42,7 +42,7 @@ func QueryTodos(params models.ListParams) []models.Todo {
 	util.CheckErr(err, func(err error) { panic(err) })
 
 	for rows.Next() {
-		var r models.Todo
+		var r models.TodoFull
 
 		err = rows.Scan(&r.ID, &r.Title, &r.Description, &r.Done)
 
@@ -53,7 +53,7 @@ func QueryTodos(params models.ListParams) []models.Todo {
 }
 
 //CreateTodo creates a todo
-func CreateTodo(todo models.Todo) {
+func CreateTodo(todo models.TodoFull) {
 	stmt, err := DB.Prepare("INSERT todo SET title = ?, dewscription = ?, done = 0")
 	util.CheckErr(err, func(err error) { panic(err) })
 

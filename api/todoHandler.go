@@ -34,7 +34,7 @@ func queryTodosHandler(rw http.ResponseWriter, r *http.Request) {
 
 //CreateTodo creates a todo
 func createTodoHandler(rw http.ResponseWriter, r *http.Request) {
-	var todo models.Todo
+	var todo models.TodoFull
 
 	decoder := json.NewDecoder(r.Body)
 	err := decoder.Decode(&todo)

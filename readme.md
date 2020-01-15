@@ -5,7 +5,7 @@ The todo app is a Golang application designed to be a example of Go, Docker and 
 Currently to get started, you will need to run go through the following
 1. [Download Docker](https://docs.docker.com/v17.12/install/)
 2. [Download Go](https://golang.org/doc/install)
-3. [Install Minikube (including kubectl](https://kubernetes.io/docs/tasks/tools/install-minikube/)
+3. [Install Minikube (including kubectl)](https://kubernetes.io/docs/tasks/tools/install-minikube/)
 4. [Install Skaffold](https://skaffold.dev/docs/quickstart/)
 5. :construction: TODO: Add secrets key addition here
 6. Run the command (for more detals see starting backed server below)

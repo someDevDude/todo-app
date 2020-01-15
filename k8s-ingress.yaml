@@ -7,17 +7,10 @@ spec:
     serviceName: default-http-backend
     servicePort: 80
   rules:
-  # - host: localhost:3000
-  #   http:
-  #     paths:
-  #     - path: /
-  #       backend:
-  #         serviceName: todo-web-service
-  #         servicePort: 80
-  - host: todo.local
+  - host: api.todo.com
     http:
       paths:
-      - path: "/"
+      - path: /
         backend:
           serviceName: todo-server-service
           servicePort: 8080

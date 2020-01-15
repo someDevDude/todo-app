@@ -1,7 +1,7 @@
 package models
 
-//Todo object
-type Todo struct {
+//TodoFull object
+type TodoFull struct {
 	ID          int
 	Title       string
 	Description string
