@@ -1,4 +1,4 @@
 ./todo-server
 .vscode
 .env
-resources/secret.yaml
+# secrets.yaml
