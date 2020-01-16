@@ -7,12 +7,29 @@ Currently to get started, you will need to run go through the following
 2. [Download Go](https://golang.org/doc/install)
 3. [Install Minikube (including kubectl)](https://kubernetes.io/docs/tasks/tools/install-minikube/)
 4. [Install Skaffold](https://skaffold.dev/docs/quickstart/)
-5. :construction: TODO: Add secrets key addition here
-6. Run the command (for more detals see starting backed server below)
+6. Create a file named secrest.yaml and insert the following. The data is base64 encoded values which you can update yourself.
+```yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: db-config
+type: Opaque
+data:                                       # plaintext values
+  dbRootUser: cm9vdA==                      # root
+  dbRootPw: cm9vdA==                        # root
+  dbName: dG9kb2xpc3Q=                      # todolist
+  dbUser: dXNlcg==                          # user
+  dbPw: cGFzc3dvcmQ=                        # password
+```
+7. Run the following to create persistent volume claim so our database has somewhere to persist
+```bash
+kubectl apply -f k8s-persistent-volume-claim.yaml
+```
+8. Run the command (for more detals see starting backed server below)
 ```bash
 skaffold dev --port-forward
 ```
-7. Get the name of the MySQL pod using 
+9. Get the name of the MySQL pod using 
 ```bash
 kubectl get pods
 ```
@@ -22,8 +39,17 @@ kubectl exec -it [POD_NAME_HERE]  -- /bin/bash
 ```
 9. In the shell, open MySQL using, entering the password from above at the prompt
 ```bash
-mysql -u [secret_root_user] -p
+mysql -u [inser the dbRootUser from secrets] -p
 ``` 
+10. Run the following
+```sql
+# create database and user
+CREATE DATABASE IF NOT EXISTS todolist;
+USE todolist;
+
+CREATE USER 'user'@'%' IDENTIFIED BY 'password';
+GRANT ALL PRIVILEGES ON todolist TO 'user'@'%';
+```
 
 ## Starting backend server
 In order to start the backend server, run the command
