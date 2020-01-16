@@ -1,6 +1,7 @@
 package database
 
 import (
+	"fmt"
 	"strings"
 
 	"github.com/someDevDude/todo-server/models"
@@ -37,6 +38,8 @@ func QueryTodos(params models.ListParams) []models.TodoFull {
 		queryString += " LIMIT :maxResults"
 		args["maxResults"] = params.MaxResults
 	}
+
+	fmt.Println(queryString)
 
 	rows, err := DB.Query(queryString)
 	util.CheckErr(err, func(err error) { panic(err) })
