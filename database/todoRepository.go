@@ -1,7 +1,6 @@
 package database
 
 import (
-	"fmt"
 	"strings"
 
 	"github.com/someDevDude/todo-server/models"
@@ -39,10 +38,11 @@ func QueryTodos(params models.ListParams) []models.TodoFull {
 		args["maxResults"] = params.MaxResults
 	}
 
-	fmt.Println(queryString)
-
 	rows, err := DB.Query(queryString)
-	util.CheckErr(err, func(err error) { panic(err) })
+	util.CheckErr(err, func(err error) {
+		util.Errorf("Error querying todos in database\n%s", err.Error())
+		return
+	})
 
 	for rows.Next() {
 		var r models.TodoFull
@@ -58,8 +58,14 @@ func QueryTodos(params models.ListParams) []models.TodoFull {
 //CreateTodo creates a todo
 func CreateTodo(todo models.TodoFull) {
 	stmt, err := DB.Prepare("INSERT todo SET title = ?, dewscription = ?, done = 0")
-	util.CheckErr(err, func(err error) { panic(err) })
+	util.CheckErr(err, func(err error) {
+		util.Errorf("Error preparing insert statement for todos\n%s", err.Error())
+		return
+	})
 
 	_, err = stmt.Exec(todo.Title, todo.Description)
-	util.CheckErr(err, func(err error) { panic(err) })
+	util.CheckErr(err, func(err error) {
+		util.Errorf("Error inseting todo into database\n%s", err.Error())
+		return
+	})
 }

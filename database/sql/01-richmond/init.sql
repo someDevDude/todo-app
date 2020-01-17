@@ -1,7 +1,7 @@
 CREATE DATABASE IF NOT EXISTS todolist;
 USE todolist;
 
-CREATE USER IF NOT EXISTS 'user'@% IDENTIFIED BY 'password';
+CREATE USER IF NOT EXISTS 'user'@'%' IDENTIFIED BY 'password';
 GRANT ALL PRIVILEGES ON todolist TO 'user'@'%';
 
 CREATE TABLE `todo` (

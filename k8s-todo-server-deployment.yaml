@@ -69,3 +69,10 @@ spec:
         ports:
           - containerPort: 8080
             protocol: TCP 
+        volumeMounts:
+        - name: todo-persistent-storage
+          mountPath: /todo/log
+      volumes:
+      - name: todo-persistent-storage
+        persistentVolumeClaim:
+          claimName: todo-pv-log-claim

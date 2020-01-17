@@ -1,5 +1,5 @@
 # build
-FROM golang:latest AS build
+FROM golang:1.13-alpine AS build
 RUN mkdir /app
 ADD . /app
 WORKDIR /app

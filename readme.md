@@ -24,6 +24,8 @@ data:                                       # plaintext values
 7. Run the following to create persistent volume claim so our database has somewhere to persist
 ```bash
 kubectl apply -f k8s-persistent-volume-claim.yaml
+kubectl apply -f secrets.yaml
+kubectl apply -f k8s-todo-database-deployment.yaml
 ```
 8. Run the command (for more detals see starting backed server below)
 ```bash
@@ -41,14 +43,26 @@ kubectl exec -it [POD_NAME_HERE]  -- /bin/bash
 ```bash
 mysql -u [inser the dbRootUser from secrets] -p
 ``` 
-10. Run this [SQL Script](https://github.com/someDevDude/todo-server/blob/master/database/sql/01-richmond/init.sql)  
+10. Run this [SQL Script](https://github.com/someDevDude/todo-server/blob/master/database/sql/01-richmond/init.sql)
+11. open http://localhost:8080 in the browser and you should see pong.
 
 ## Starting backend server
-In order to start the backend server, run the command
+In order to start the backend server, run the commands
 ```bash
+kubectl apply -f k8s-persistent-volume-claim.yaml
+kubectl apply -f secrets.yaml
+kubectl apply -f k8s-todo-database-deployment.yaml
 skaffold dev --port-forward
 ```
 This will build images of the database and the server, deploy them to minikube, watch for changes and auctomatically build when changes are detected. The database will be accessible via localhost:3307 (however it might also be 3306 depending if you have MySQL running on the local machine) and the server available at http://localhost:8080.
+
+## Stoping the backend server
+Exit the Skaffold in the terminal using CTRL+c then, run the following
+```bash
+kubectl delete -f k8s-persistent-volume-claim.yaml
+kubectl delete -f secrets.yaml
+kubectl delete -f k8s-todo-database-deployment.yaml
+```
 
 ## Starting the frontend server
 Coming soon, probably when there is a frontend server

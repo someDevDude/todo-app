@@ -8,8 +8,6 @@ build:
 deploy:
   kubectl:
     manifests:
-    - secrets.yaml
-    - k8s-todo-database-deployment.yaml
     - k8s-todo-server-deployment.yaml
 portForward:
   - resourceType: deployment

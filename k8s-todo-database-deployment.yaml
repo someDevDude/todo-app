@@ -45,4 +45,4 @@ spec:
       volumes:
       - name: todo-persistent-storage
         persistentVolumeClaim:
-          claimName: todo-pv-claim
+          claimName: todo-pv-db-claim
