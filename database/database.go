@@ -29,6 +29,6 @@ func Connect() {
 
 	util.CheckErr(err, func(err error) {
 		util.Criticalf("Error connecting to database \n%s", err.Error())
-		return
+		panic(err)
 	})
 }

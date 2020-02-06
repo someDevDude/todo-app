@@ -29,7 +29,7 @@ func queryTodosHandler(rw http.ResponseWriter, r *http.Request) {
 		return
 	})
 
-	results := database.QueryTodos(params)
+	results, err := database.QueryTodos(params)
 
 	resp, err := json.Marshal(results)
 	util.CheckErr(err, func(err error) {
@@ -43,15 +43,21 @@ func queryTodosHandler(rw http.ResponseWriter, r *http.Request) {
 
 //CreateTodo creates a todo
 func createTodoHandler(rw http.ResponseWriter, r *http.Request) {
-	var todo models.TodoFull
+	var todo *models.TodoFull
 
 	decoder := json.NewDecoder(r.Body)
 	err := decoder.Decode(&todo)
-	util.CheckErr(err, func(err error) {
-		util.Errorf("Error parsing todos\n%s", err.Error())
+	if err != nil {
 		errorresponse.ErrorParsingRequestBody(rw)
-		return
-	})
+	}
 
-	database.CreateTodo(todo)
+	todo, err = database.CreateTodo(todo)
+
+	response, err := json.Marshal(todo)
+	if err != nil {
+		errorresponse.ErrorParsingTodos(rw)
+	}
+
+	rw.Write(response)
+
 }

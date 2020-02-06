@@ -1,6 +1,7 @@
 package database
 
 import (
+	"fmt"
 	"strings"
 
 	"github.com/someDevDude/todo-server/models"
@@ -8,7 +9,7 @@ import (
 )
 
 //QueryTodos queires todos
-func QueryTodos(params models.ListParams) []models.TodoFull {
+func QueryTodos(params models.ListParams) ([]models.TodoFull, error) {
 	var results []models.TodoFull
 
 	queryString := "SELECT * FROM todo"
@@ -39,10 +40,10 @@ func QueryTodos(params models.ListParams) []models.TodoFull {
 	}
 
 	rows, err := DB.Query(queryString)
-	util.CheckErr(err, func(err error) {
+	if err != nil {
 		util.Errorf("Error querying todos in database\n%s", err.Error())
-		return
-	})
+		return nil, err
+	}
 
 	for rows.Next() {
 		var r models.TodoFull
@@ -52,20 +53,49 @@ func QueryTodos(params models.ListParams) []models.TodoFull {
 		results = append(results, r)
 	}
 
-	return results
+	return results, nil
 }
 
 //CreateTodo creates a todo
-func CreateTodo(todo models.TodoFull) {
-	stmt, err := DB.Prepare("INSERT todo SET title = ?, dewscription = ?, done = 0")
-	util.CheckErr(err, func(err error) {
+func CreateTodo(todo *models.TodoFull) (*models.TodoFull, error) {
+	stmt, err := DB.Prepare("INSERT todo SET title = ?, description = ?, done = 0")
+	if err != nil {
 		util.Errorf("Error preparing insert statement for todos\n%s", err.Error())
-		return
-	})
+		return nil, err
+	}
 
-	_, err = stmt.Exec(todo.Title, todo.Description)
-	util.CheckErr(err, func(err error) {
+	result, err := stmt.Exec(todo.Title, todo.Description)
+	if err != nil {
 		util.Errorf("Error inseting todo into database\n%s", err.Error())
-		return
-	})
+		return nil, err
+	}
+
+	lastInsertedRowID, err := result.LastInsertId()
+	if err != nil {
+		util.Errorf("Error inserting todo into database\n%s", err.Error())
+		return nil, err
+	}
+
+	todo, err = GetTodo(lastInsertedRowID)
+	if err != nil {
+		return nil, err
+	}
+
+	fmt.Printf("%v", result)
+
+	return todo, nil
+}
+
+// GetTodo returns todo by id
+func GetTodo(id int64) (*models.TodoFull, error) {
+	row := DB.QueryRowx("SELECT * FROM todo WHERE id = ?", id)
+
+	var todo models.TodoFull
+	err := row.StructScan(&todo)
+	if err != nil {
+		util.Errorf("Error parsing row to todo\n%s", err.Error())
+		return nil, err
+	}
+
+	return &todo, nil
 }

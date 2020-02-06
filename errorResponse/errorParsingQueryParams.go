@@ -9,11 +9,10 @@ import (
 
 // ErrorParsingQueryParams throws error
 func ErrorParsingQueryParams(rw http.ResponseWriter) {
-	rw.WriteHeader(http.StatusBadRequest)
 	resp, err := json.Marshal(ErrorResponse{http.StatusBadRequest, InternalErrorCodeParsingQueryParams, "Error", "Error parsing url query params"})
-	util.CheckErr(err, func(err error) {
-		util.Error("Error creating error response")
-
-	})
+	if err != nil {
+		util.Error("error creating ErrorParsingQueryParams response")
+	}
+	rw.WriteHeader(http.StatusBadRequest)
 	rw.Write(resp)
 }
