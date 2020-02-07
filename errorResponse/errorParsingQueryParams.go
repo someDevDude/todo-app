@@ -14,5 +14,6 @@ func ErrorParsingQueryParams(rw http.ResponseWriter) {
 		util.Error("error creating ErrorParsingQueryParams response")
 	}
 	rw.WriteHeader(http.StatusBadRequest)
+
 	rw.Write(resp)
 }

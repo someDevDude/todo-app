@@ -11,10 +11,10 @@ import (
 // ErrorParsingTodos throws error
 func ErrorParsingTodos(rw http.ResponseWriter) {
 	rw.WriteHeader(http.StatusBadRequest)
-	resp, err := json.Marshal(ErrorResponse{http.StatusBadRequest, InternalErrorCodeParsingResponse, "Error", "Error parsing todos"})
-	util.CheckErr(err, func(err error) {
-		util.Error("Error creating error response")
 
-	})
+	resp, err := json.Marshal(ErrorResponse{http.StatusBadRequest, InternalErrorCodeParsingResponse, "Error", "Error parsing todos"})
+	if err != nil {
+		util.Error("Error creating error response")
+	}
 	rw.Write(resp)
 }

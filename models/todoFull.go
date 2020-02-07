@@ -2,8 +2,8 @@ package models
 
 //TodoFull object
 type TodoFull struct {
-	ID          int64  `schema:"id" db:"ID"`
-	Title       string `schema:"title" db:"TITLE"`
-	Description string `schema:"description" db:"DESCRIPTION"`
-	Done        bool   `schema:"done" db:"DONE"`
+	ID          int64  `json:"id" db:"ID"`
+	Title       string `json:"title" db:"TITLE"`
+	Description string `json:"description" db:"DESCRIPTION"`
+	Done        bool   `json:"done" db:"DONE"`
 }

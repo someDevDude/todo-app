@@ -14,5 +14,6 @@ func ErrorParsingRequestBody(rw http.ResponseWriter) {
 		util.Error("error creating ErrorParsingRequestBody response")
 	}
 	rw.WriteHeader(http.StatusBadRequest)
+
 	rw.Write([]byte(resp))
 }

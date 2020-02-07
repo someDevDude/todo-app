@@ -27,8 +27,8 @@ func Connect() {
 
 	DB = db
 
-	util.CheckErr(err, func(err error) {
+	if err != nil {
 		util.Criticalf("Error connecting to database \n%s", err.Error())
 		panic(err)
-	})
+	}
 }

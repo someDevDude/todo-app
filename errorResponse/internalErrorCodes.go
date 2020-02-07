@@ -5,4 +5,5 @@ var (
 	InternalErrorCodeParsingQueryParams = 001
 	InternalErrorCodeParsingResponse    = 002
 	InternalErrorCodeParsingRequestBody = 003
+	InternalErrorCodeMissingParamater   = 004
 )
