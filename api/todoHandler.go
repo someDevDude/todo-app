@@ -49,7 +49,7 @@ func createTodoHandler(rw http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	validationError := validateTodo(todo)
+	validationError := ValidateTodo(todo)
 	if validationError != "" {
 		errorresponse.ErrorMissingParameter(rw, validationError)
 		return
@@ -67,7 +67,8 @@ func createTodoHandler(rw http.ResponseWriter, r *http.Request) {
 
 }
 
-func validateTodo(todo *models.TodoFull) string {
+// ValidateTodo validates todo
+func ValidateTodo(todo *models.TodoFull) string {
 	if todo.Title == "" {
 		return "Missing title for todo"
 	}
