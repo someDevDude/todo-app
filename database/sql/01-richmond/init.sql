@@ -2,9 +2,11 @@ CREATE DATABASE IF NOT EXISTS todolist;
 USE todolist;
 
 CREATE USER IF NOT EXISTS 'user'@'%' IDENTIFIED BY 'password';
-GRANT ALL PRIVILEGES ON todolist TO 'user'@'%';
+GRANT ALL PRIVILEGES ON todolist.* TO 'user'@'%';
 
 -- Logout and login is user above
+
+USE todolist;
 
 CREATE TABLE `todo` (
   `ID` INT NOT NULL AUTO_INCREMENT,
