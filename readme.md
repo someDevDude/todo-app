@@ -44,7 +44,7 @@ kubectl exec -it [POD_NAME_HERE]  -- /bin/bash
 mysql -u [inser the dbRootUser from secrets] -p
 ``` 
 10. Run this [SQL Script](https://github.com/someDevDude/todo-server/blob/master/database/sql/01-richmond/init.sql)
-11. open http://localhost:8080 in the browser and you should see pong.
+11. Open http://localhost:8080 in the browser and you should see pong.
 
 ## Starting backend server
 In order to start the backend server, run the commands
