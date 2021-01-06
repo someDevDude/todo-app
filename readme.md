@@ -7,7 +7,7 @@ Currently to get started, you will need to run go through the following
 2. [Download Go](https://golang.org/doc/install)
 3. [Install Minikube (including kubectl)](https://kubernetes.io/docs/tasks/tools/install-minikube/)
 4. [Install Skaffold](https://skaffold.dev/docs/quickstart/)
-6. Create a file named secrest.yaml and insert the following. The data is base64 encoded values which you can update yourself.
+6. Create a file named secrets.yaml and insert the following. The data is base64 encoded values which you can update yourself.
 ```yaml
 apiVersion: v1
 kind: Secret
