@@ -27,24 +27,24 @@ kubectl apply -f k8s-persistent-volume-claim.yaml
 kubectl apply -f secrets.yaml
 kubectl apply -f k8s-todo-database-deployment.yaml
 ```
-8. Run the command (for more detals see starting backed server below)
-```bash
-skaffold dev --port-forward
-```
-9. Get the name of the MySQL pod using 
+8. Get the name of the MySQL pod using 
 ```bash
 kubectl get pods
 ```
-8. Open a bash shell in the above by running
+9. Open a bash shell in the above by running
 ```bash
 kubectl exec -it [POD_NAME_HERE]  -- /bin/bash
 ```
-9. In the shell, open MySQL using, entering the password from above at the prompt
+10. In the shell, open MySQL using, entering the password from above at the prompt
 ```bash
 mysql -u [inser the dbRootUser from secrets] -p
 ``` 
-10. Run this [SQL Script](https://github.com/someDevDude/todo-server/blob/master/database/sql/01-richmond/init.sql)
-11. Open http://localhost:8080 in the browser and you should see pong.
+11. Run this [SQL Script](https://github.com/someDevDude/todo-server/blob/master/database/sql/01-richmond/init.sql)
+12. Run the command
+```bash
+skaffold dev --port-forward
+```
+13. Open http://localhost:8080 in the browser and you should see pong.
 
 ## Starting backend server
 In order to start the backend server, run the commands
